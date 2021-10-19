@@ -81,6 +81,13 @@ t1 = time.time() # end timer
 total = t1-t0  # calc time passsed
 print("Code took " + str(total/60) + " minutes to run.")
 
+print("Single Mean Bias: "+ str(mean_bias_s))
+print("Single Mean Var: "+ str(mean_var_s))
+print("Single Error: "+ str(single_gen_square_err))
+print("Full Mean Bias: "+ str(mean_bias_a))
+print("Full Mean Var: "+ str(mean_var_a))
+print("Full Error: "+ str(total_gen_square_err))
+
 # plotting figures
 # plt.figure(0)
 # plt.plot(range(1,iterations+1),Total_Train_Err,'b-')
