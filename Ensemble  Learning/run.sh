@@ -9,3 +9,7 @@ echo "Running Practice 2d"
 python3.9 run_RandForest.py
 echo "Running Practice 2e"
 python3.9 RandomTreeVarianceandBias.py
+cd ..
+cd Linear\ \ Regression/
+echo "Running Practice 4"
+python3.9 grad_descent_algs.py
