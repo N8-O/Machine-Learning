@@ -37,3 +37,4 @@ plt.ylim([min(Total_Train_Err)-.001,max([max(Total_Train_Err),max(Total_Test_Err
 plt.xlabel("Number of Trees")
 plt.ylabel("Error")
 plt.legend(["Training Error","Testing Error"])
+plt.show()
