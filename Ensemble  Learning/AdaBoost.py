@@ -78,7 +78,7 @@ total = t1-t0  # calc time passsed
 print("Code took " + str(total/60) + " minutes to run.")
 
 # plotting figures
-plt.figure(0)
+plt.figure()
 plt.plot(range(1,iterations+1),Total_Train_Err,'b-')
 plt.plot(range(1,iterations+1),Total_Test_Err,'r-')
 plt.title("Error As Number of Stumps Increases")
@@ -89,7 +89,7 @@ plt.ylabel("Error")
 plt.legend(["Training Error","Testing Error"])
 plt.show()
 
-plt.figure(1)
+plt.figure()
 plt.plot(range(1,iterations+1),train_err,'b.')
 plt.plot(range(1,iterations+1),test_err,'r.')
 plt.title("Error for Each Stump")
