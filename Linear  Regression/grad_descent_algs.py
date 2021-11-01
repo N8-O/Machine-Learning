@@ -117,7 +117,7 @@ r =  .015
 gd_ans,gd_train_cost = gradient_decent(train_y,train_x,w,r)
 gd_test_cost = gradient_decent_test(test_y,test_x,gd_ans[-1])
 
-w = np.array([[-0.01, 0.7, 0.6, 0.7, 1, 0.05, 1.1, 1.2]])
+w = np.array([[0, 0, 0, 0, 0, 0, 0, 0]])
 
 steps = 10000
 r = .0001
