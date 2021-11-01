@@ -28,7 +28,7 @@ total = t1-t0  # calc time passsed
 print("Code took " + str(total/60) + " minutes to run.")
 
 # plotting figures
-plt.figure(0)
+plt.figure()
 plt.plot(range(1,iterations+1),Total_Train_Err,'b-')
 plt.plot(range(1,iterations+1),Total_Test_Err,'r-')
 plt.title("Random Forest Error As Trees Increases")
