@@ -119,7 +119,7 @@ gd_test_cost = gradient_decent_test(test_y,test_x,gd_ans[-1])
 
 w = np.array([[0, 0, 0, 0, 0, 0, 0, 0]])
 
-steps = 10000
+steps = 20000
 r = .0001
 sgd_ans,sgd_train_cost = stochastic_gradient_decent(train_y,train_x,w,steps,r,test_x,test_y)
 # sgd_test_cost = gradient_decent_test(test_y,test_x,sgd_ans[-1])
