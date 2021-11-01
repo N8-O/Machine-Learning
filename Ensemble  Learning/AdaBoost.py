@@ -87,6 +87,7 @@ plt.ylim([min(Total_Train_Err)-.001,max([max(Total_Train_Err),max(Total_Test_Err
 plt.xlabel("Number of Stumps")
 plt.ylabel("Error")
 plt.legend(["Training Error","Testing Error"])
+plt.show()
 
 plt.figure(1)
 plt.plot(range(1,iterations+1),train_err,'b.')
@@ -97,5 +98,6 @@ plt.ylim([min(train_err)-.001,max([max(train_err),max(test_err)])+.001])
 plt.xlabel("Stump Number")
 plt.ylabel("Error")
 plt.legend(["Weighted Training Error","Testing Error"])
+plt.show()
 
     
