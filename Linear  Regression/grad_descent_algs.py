@@ -124,17 +124,19 @@ r = .0001
 sgd_ans,sgd_train_cost = stochastic_gradient_decent(train_y,train_x,w,steps,r,test_x,test_y)
 # sgd_test_cost = gradient_decent_test(test_y,test_x,sgd_ans[-1])
 
-plt.figure(0)
+plt.figure()
 plt.plot(range(len(gd_train_cost)),gd_train_cost)
 plt.title("Gradient Decent Cost Convergence")
 plt.xlabel("Iteration")
 plt.ylabel("Cost")
+plt.show()
 
-plt.figure(1)
+plt.figure()
 plt.plot(range(len(sgd_train_cost)),sgd_train_cost)
 plt.title("Stochastic Gradient Decent Cost Convergence")
 plt.xlabel("Iteration")
 plt.ylabel("Cost")
+plt.show()
 
 
 
