@@ -66,11 +66,9 @@ def gaussian_kernel(xi, xj, gamma):
 def dual_svm(weight_constant, gamma, labels, xs):
 
     weight = np.zeros(len(xs[0, :-1]))
-    weights = []
+    stuff = []
 
     mini_bounds = len(xs)*[(0,weight_constant)]
-    # for i in range(len(xs)):
-    #     bnds.append((0, weight_constant))
         
     mini_constraints = {'type': 'eq', 'fun': constraint_func, 'args': (labels,)}
 
@@ -94,25 +92,20 @@ def dual_svm(weight_constant, gamma, labels, xs):
         for i in range(len(weight)):
             weight += dual_result_alphas[i] * labels[i] * gaussian_kernel(xs[i],np.zeros(len(xs[i])), gamma)
 
+    # did not finish implementation
     positive_alphas = 0
-
     for i in range(len(xs)):
         if dual_result_alphas[i] > 0:
             positive_alphas += 1
 
-
     b = labels - (dual_result_alphas * labels).dot(gram_matrix)
-
 
     b = sum(b)/positive_alphas
 
-    weights.append(np.insert(weight, len(weight), b))
-    # weights.append(positive_alphas)
-
-    # weights.append(xs)
-    # weights.append(dual_result)
-    # weights.append(labels)
-    return weights
+    stuff.append(np.insert(weight, len(weight), b))
+    # stuff.append(positive_alphas)
+    # stuff.append(dual_result)
+    return stuff
 
 
 def PrimalPrediction(xs,w):
@@ -123,31 +116,6 @@ def PrimalPrediction(xs,w):
 def DualPrediction(xs,w):
     a = w*xs
     out = np.sign(np.sum(a,axis = 1))
-    return out
-
-# def DualKernalPrediction(xs,w,gamma):
-#     pairwise_dists = pdist(xs, 'euclidean')
-#     gram_matrix = np.exp(-pairwise_dists ** 2 / gamma)
-#     a = w*gram_matrix
-#     out = np.sign(np.sum(a,axis = 1))
-#     return out
-
-def VotedPrediction(xs,w,c):
-    out = 0
-    for i in range(len(c)):
-        a = w[i]*xs
-        a = np.sign(np.sum(a,axis = 1))
-        out = out+c[i]*a
-    out = np.sign(out)
-    return out
-
-def AveragePrediction(xs,w,c):
-    out = 0
-    for i in range(len(c)):
-        a = w[i]*xs
-        a = np.sign(np.sum(a,axis = 1))
-        out = out+c[i]*a
-    out = np.sign(out)
     return out
 
 # names of files in to run perceptron algorithm
@@ -166,45 +134,45 @@ gamma = 1
 a = .5
 
 
-# for c in C:
-#     s_w = SVM_Primal(train_x,train_label,epochs,gamma,a,c,schedule)
-#     std_train_predictions = PrimalPrediction(train_x,s_w)
-#     std_test_predictions = PrimalPrediction(test_x,s_w)
-#     std_train_error = (sum(abs(train_label-std_train_predictions))/2)/len(train_label)
-#     std_test_error = (sum(abs(test_label-std_test_predictions))/2)/len(test_label)
-#     print("SVM Primal (a)")
-#     print("Weights: " + str(s_w))
-#     print("Average Prediction Error on Training Data: " + str(std_train_error))
-#     print("Average Prediction Error on Test Data: " + str(std_test_error))
-#     print("\n")
+for c in C:
+    s_w = SVM_Primal(train_x,train_label,epochs,gamma,a,c,schedule)
+    std_train_predictions = PrimalPrediction(train_x,s_w)
+    std_test_predictions = PrimalPrediction(test_x,s_w)
+    std_train_error = (sum(abs(train_label-std_train_predictions))/2)/len(train_label)
+    std_test_error = (sum(abs(test_label-std_test_predictions))/2)/len(test_label)
+    print("SVM Primal (a)")
+    print("Weights: " + str(s_w))
+    print("Average Prediction Error on Training Data: " + str(std_train_error))
+    print("Average Prediction Error on Test Data: " + str(std_test_error))
+    print("\n")
 
-# schedule = "b"
-# for c in C:
-#     s_w = SVM_Primal(train_x,train_label,epochs,gamma,a,c,schedule)
-#     std_train_predictions = PrimalPrediction(train_x,s_w)
-#     std_test_predictions = PrimalPrediction(test_x,s_w)
-#     std_train_error = (sum(abs(train_label-std_train_predictions))/2)/len(train_label)
-#     std_test_error = (sum(abs(test_label-std_test_predictions))/2)/len(test_label)
-#     print("SVM Primal (b)")
-#     print("Weights: " + str(s_w))
-#     print("Average Prediction Error on Training Data: " + str(std_train_error))
-#     print("Average Prediction Error on Test Data: " + str(std_test_error))
-#     print("\n")
+schedule = "b"
+for c in C:
+    s_w = SVM_Primal(train_x,train_label,epochs,gamma,a,c,schedule)
+    std_train_predictions = PrimalPrediction(train_x,s_w)
+    std_test_predictions = PrimalPrediction(test_x,s_w)
+    std_train_error = (sum(abs(train_label-std_train_predictions))/2)/len(train_label)
+    std_test_error = (sum(abs(test_label-std_test_predictions))/2)/len(test_label)
+    print("SVM Primal (b)")
+    print("Weights: " + str(s_w))
+    print("Average Prediction Error on Training Data: " + str(std_train_error))
+    print("Average Prediction Error on Test Data: " + str(std_test_error))
+    print("\n")
 
 
-# for c in C:
-#     dual_w = dual_svm(c,None,train_label, train_x)
-#     dual_w = dual_w[0][0:-1]
-#     std_train_predictions = PrimalPrediction(train_x,dual_w)
-#     std_test_predictions = PrimalPrediction(test_x,dual_w)
-#     std_train_error = (sum(abs(train_label-std_train_predictions))/2)/len(train_label)
-#     std_test_error = (sum(abs(test_label-std_test_predictions))/2)/len(test_label)
-#     print("SVM Dual (non-kernal)")
-#     print("Weights: " + str(dual_w))
-#     print("C: " + str(c))
-#     print("Average Prediction Error on Training Data: " + str(std_train_error))
-#     print("Average Prediction Error on Test Data: " + str(std_test_error))
-#     print("\n")
+for c in C:
+    dual_w = dual_svm(c,None,train_label, train_x)
+    dual_w = dual_w[0][0:-1]
+    std_train_predictions = PrimalPrediction(train_x,dual_w)
+    std_test_predictions = PrimalPrediction(test_x,dual_w)
+    std_train_error = (sum(abs(train_label-std_train_predictions))/2)/len(train_label)
+    std_test_error = (sum(abs(test_label-std_test_predictions))/2)/len(test_label)
+    print("SVM Dual (non-kernal)")
+    print("Weights: " + str(dual_w))
+    print("C: " + str(c))
+    print("Average Prediction Error on Training Data: " + str(std_train_error))
+    print("Average Prediction Error on Test Data: " + str(std_test_error))
+    print("\n")
     
     
 gammas = [.1,.5,1,5,100]
