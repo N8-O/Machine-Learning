@@ -1,2 +1,2 @@
 SVM homework section
-To Run SVP simply use the bash file
+To Run SVM simply use the bash file
