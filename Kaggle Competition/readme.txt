@@ -1,1 +1,1 @@
-
+The run.sh file will execute the training of the neural network with the parameters that were solved for in the final project report and create a submission file for kaggle. The actual process of getting the graphs and various charts in the report is a process that took several days of iterations and is commented out to reduce computational time and complexity.
